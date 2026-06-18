@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cricket Tournament Registration 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0b0b0b;color:#fff}
+:root{--gold:#d4af37;--red:#8b0000}
+.hero{min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;background:linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)),radial-gradient(circle at top,var(--red),#000)}
+.logo{width:160px;max-width:80%;margin-bottom:20px}
+h1{color:var(--gold);font-size:3rem}
+.hero p{max-width:700px;margin-top:15px;line-height:1.7}
+.start-date{margin-top:20px;background:var(--red);padding:12px 24px;border-radius:30px}
+.section{padding:60px 20px}
+h2{text-align:center;color:var(--gold);margin-bottom:25px}
+.instructions,.form-box{max-width:900px;margin:auto;background:#141414;padding:25px;border-radius:15px}
+.instructions ul{padding-left:20px;line-height:1.8}
+.slider-container{text-align:center}
+.slider-container img{width:240px;height:240px;object-fit:contain}
+.team-name{color:var(--gold);font-size:1.4rem;margin-top:10px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px}
+input,select{padding:14px;border:none;border-radius:8px;background:#222;color:#fff}
+button{width:100%;padding:15px;margin-top:20px;background:var(--gold);border:none;border-radius:8px;font-weight:bold;cursor:pointer}
+footer{text-align:center;padding:30px;background:#050505}
+footer a{color:var(--gold)}
+@media(max-width:768px){h1{font-size:2rem}.slider-container img{width:170px;height:170px}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<img src="logo.png" class="logo" alt="Tournament Logo">
+<h1>Cricket Tournament 2026</h1>
+<p>Register now and take part in an exciting cricket competition featuring top local talent.</p>
+<div class="start-date">Tournament Begins: 1 July 2026</div>
+</section>
+
+<section class="section">
+<h2>How To Register</h2>
+<div class="instructions">
+<ul>
+<li>Complete the registration form below.</li>
+<li>Select your primary cricket role and specialization.</li>
+<li>Click "Register via WhatsApp".</li>
+<li>Your details will be sent to the tournament organizers.</li>
+<li>Team allocation will be communicated after registration.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<h2>Participating Teams</h2>
+<div class="slider-container">
+<img id="teamLogo" src="team-logos/amabhubesi.png" alt="Team Logo">
+<div id="teamName" class="team-name">Amabhubesi</div>
+</div>
+</section>
+
+<section class="section">
+<h2>Player Registration</h2>
+<div class="form-box">
+<form id="registrationForm">
+<div class="form-grid">
+<input type="text" id="fullname" placeholder="Full Name" required>
+<input type="number" id="age" placeholder="Age" required>
+<input type="tel" id="phone" placeholder="Phone Number" required>
+
+<select id="role" required>
+<option value="">Primary Role</option>
+<option>Batsman</option>
+<option>Bowler</option>
+<option>All Rounder</option>
+<option>Wicket Keeper</option>
+</select>
+
+<select id="specialization" required>
+<option value="">Specialization</option>
+</select>
+
+<select id="battingHand" required>
+<option value="">Batting Hand</option>
+<option>Right Handed</option>
+<option>Left Handed</option>
+</select>
+
+<select id="bowlingHand" required>
+<option value="">Bowling Hand</option>
+<option>Right Arm</option>
+<option>Left Arm</option>
+</select>
+</div>
+
+<button type="submit">Register via WhatsApp</button>
+</form>
+</div>
+</section>
+
+<footer>
+<p>Designed by Sentinel Nexus Systems</p>
+<p><a href="https://www.sentinelxinvestments.com" target="_blank">Visit www.sentinelxinvestments.com</a></p>
+</footer>
+
+<script>
+const teams=[
+{name:"Amabhubesi",logo:"team-logos/amabhubesi.png"},
+{name:"Amaviyo Warriors",logo:"team-logos/amaviyo-warriors.png"},
+{name:"Khami Kudus",logo:"team-logos/khami-kudus.png"},
+{name:"Lobengula Leopards",logo:"team-logos/lobengula-leopards.png"},
+{name:"Matopo Royals",logo:"team-logos/matopo-royals.png"},
+{name:"Mzilikazi Regiments",logo:"team-logos/mzilikazi-regiments.png"}
+];
+
+let current=0;
+setInterval(()=>{
+current=(current+1)%teams.length;
+document.getElementById("teamLogo").src=teams[current].logo;
+document.getElementById("teamName").innerText=teams[current].name;
+},2000);
+
+const role=document.getElementById("role");
+const specialization=document.getElementById("specialization");
+
+role.addEventListener("change",()=>{
+specialization.innerHTML='<option value="">Specialization</option>';
+let options=[];
+
+if(role.value==="Batsman"){
+options=["Opening Batsman","Top Order Batsman","Middle Order Batsman","Finisher"];
+}else if(role.value==="Bowler"){
+options=["Right Arm Fast","Right Arm Fast Medium","Left Arm Fast","Left Arm Fast Medium","Off Spinner","Leg Spinner","Left Arm Orthodox","Chinaman"];
+}else if(role.value==="All Rounder"){
+options=["Pace Bowling All Rounder","Fast Bowling All Rounder","Seam Bowling All Rounder","Off Spin All Rounder","Leg Spin All Rounder","Left Arm Orthodox All Rounder","Batting All Rounder","Genuine All Rounder"];
+}else if(role.value==="Wicket Keeper"){
+options=["Wicket Keeper Batter","Specialist Wicket Keeper"];
+}
+
+options.forEach(o=>{
+let opt=document.createElement("option");
+opt.value=o;
+opt.textContent=o;
+specialization.appendChild(opt);
+});
+});
+
+document.getElementById("registrationForm").addEventListener("submit",function(e){
+e.preventDefault();
+const msg=`🏏 CRICKET TOURNAMENT REGISTRATION
+
+Name: ${fullname.value}
+Age: ${age.value}
+Phone: ${phone.value}
+Role: ${role.value}
+Specialization: ${specialization.value}
+Batting Hand: ${battingHand.value}
+Bowling Hand: ${bowlingHand.value}`;
+
+window.open("https://wa.me/26771976700?text="+encodeURIComponent(msg),"_blank");
+});
+</script>
+
+</body>
+</html>
